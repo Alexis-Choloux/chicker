@@ -1,0 +1,50 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+#leftSidebar li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+}
+#leftSidebar li a:hover {
+    color: grey;
+}
+
+#chickBox {
+    border: solid #fed835 1px;
+    border-radius: 10px;
+    box-shadow: #fed935af 0px 0px 10px 2px;
+}
+
+#chickBox textarea {
+    border-radius: 10px;
+}
+
+#chickBox button {
+    color: rgb(85, 84, 84);
+}
+
+#chickPic {
+    border-radius: 50px;
+    margin-top: -8px;
+}
+
+#postContent {
+    border: solid rgb(163, 163, 163) 1px;
+    border-radius: 5px;
+}
+
+#postContent .col-md-12 {
+    border-bottom: solid grey 1px;
+}
+
+#avatar img {
+    border-radius: 50px;
+}

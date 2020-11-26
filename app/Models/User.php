@@ -17,7 +17,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'chickname',
         'email',
         'password',
     ];
@@ -40,4 +42,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relation
+    public function chicks()
+    {
+        return $this->hasMany('App\Models\Chick');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role', 'role_id');
+    }
+
+
+    public function timeline()
+    {
+        return Chick::where('user_id', $this->id)->latest()->get();
+    }
 }
