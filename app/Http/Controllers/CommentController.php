@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
+use App\Models\Chick;
 
 class CommentController extends Controller
 {
@@ -13,7 +15,9 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        return view('comments.index', [
+            'comments' => Comment::latest()
+        ]);
     }
 
     /**
@@ -34,8 +38,20 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'comment' => 'required|min:5|max:255',
+        ]);
+
+        $comment = new Comment;
+        $comment->comment = $request->comment;
+        $comment->user()->associate($request->comment);
+
+        $chick = Chick::find($request->chick_id);
+        $chick->comments()->save($comment);
+
+        return back();
     }
+
 
     /**
      * Display the specified resource.

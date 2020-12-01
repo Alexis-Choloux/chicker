@@ -7,6 +7,8 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+
+// LEFT SIDEBAR
 #leftSidebar li a {
     text-decoration: none;
     color: black;
@@ -17,6 +19,8 @@
     color: grey;
 }
 
+
+// CHICK CONTENT
 #chickBox {
     border: solid #fed835 1px;
     border-radius: 10px;
@@ -24,7 +28,7 @@
 }
 
 #chickBox textarea {
-    border-radius: 10px;
+    border: none;
 }
 
 #chickBox button {
@@ -36,15 +40,21 @@
     margin-top: -8px;
 }
 
-#postContent {
+#timeline {
     border: solid rgb(163, 163, 163) 1px;
     border-radius: 5px;
 }
 
-#postContent .col-md-12 {
-    border-bottom: solid grey 1px;
+#postContent {
+    border-bottom: solid rgb(163, 163, 163) 1px;
 }
 
-#avatar img {
-    border-radius: 50px;
+#commentBtn {
+    margin-top: -60px;
+}
+
+
+// PROFILE
+#profileImg {
+    margin-top: -80px;
 }

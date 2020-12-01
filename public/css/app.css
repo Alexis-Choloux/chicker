@@ -10921,7 +10921,7 @@ a.text-dark:focus {
 }
 
 #chickBox textarea {
-  border-radius: 10px;
+  border: none;
 }
 
 #chickBox button {
@@ -10933,16 +10933,20 @@ a.text-dark:focus {
   margin-top: -8px;
 }
 
-#postContent {
+#timeline {
   border: solid #a3a3a3 1px;
   border-radius: 5px;
 }
 
-#postContent .col-md-12 {
-  border-bottom: solid grey 1px;
+#postContent {
+  border-bottom: solid #a3a3a3 1px;
 }
 
-#avatar img {
-  border-radius: 50px;
+#commentBtn {
+  margin-top: -60px;
+}
+
+#profileImg {
+  margin-top: -80px;
 }
 
