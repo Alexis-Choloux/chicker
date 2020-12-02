@@ -17,7 +17,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
-    
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -72,10 +72,20 @@
                         </li>
                         @endif
                         @else
-                        <li class="nav-item dropdown">
+                        <li class="mr-5">
+                            <form class="form-inline my-2 my-lg-0" method="POST" role="search" action="{{ route('chicks.search') }}">
+                                @csrf
+                                <input class="form-control mr-sm-2" type="search" name="q" placeholder="Rechercher" aria-label="Search">
+                                    <button class="btn btn-outline-warning my-2 my-sm-0 text-secondary" type="submit">Rechercher</button>
+                            </form>
+                        </li>
+
+                        <li class="nav-item dropdown ml-5">
+
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ auth()->user()->chickname }}
                             </a>
+
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
@@ -94,6 +104,7 @@
                                 </form>
                             </div>
                         </li>
+
                         @endguest
                     </ul>
                 </div>

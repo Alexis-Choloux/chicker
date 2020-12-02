@@ -24,11 +24,12 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/chicks', [App\Http\Controllers\ChickController::class, 'index'])->name('home'); 
 
-    Route::post('/comments', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
+    Route::resource('/comments', App\Http\Controllers\CommentController::class);
 
-    Route::get('/comments', [App\Http\Controllers\CommentController::class, 'index'])->name('comments');
 });
 
+
+Route::post('/chicks/search', [App\Http\Controllers\ChickController::class, 'search'])->name('chicks.search');
 
 
 // SIDEBAR

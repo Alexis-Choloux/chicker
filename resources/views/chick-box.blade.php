@@ -2,7 +2,7 @@
     <div class="col-md-12">
 
 
-        <form method="POST" action="{{ route('chicks.store') }}" id="chickBox">
+        <form method="POST" action="{{ route('chicks.store') }}" id="chickBox" name="chickBox">
 
             @csrf
 
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="col-md-6 text-right">
-                    <input type="submit" value="Chicker !" class="btn btn-warning mr-5 mb-3">
+                    <input type="submit" value="Chicker !" name="chicker" class="btn btn-warning mr-5 mb-3">
                 </div>
             </div>
 

@@ -1,7 +1,9 @@
 <div class="row">
     <div class="col-md-12">
 
-        <button class="btn btn-sm btn-secondary mb-2" type="button" data-toggle="collapse" data-target="#collapseComments{{ $chick->id }}" aria-expanded="false" aria-controls="collapseComments{{ $chick->id }}" id="commentBtn">
+        <button class="btn btn-sm btn-secondary mb-2" type="button" data-toggle="collapse" 
+        data-target="#collapseComments{{ $chick->id }}" aria-expanded="false" 
+        aria-controls="collapseComments{{ $chick->id }}" id="commentBtn">
             Commentaires
         </button>
 
@@ -14,20 +16,22 @@
 
 
                         <!-- comment box -->
-                        <form method="POST" action="{{ route('comment.store') }} id="commentBox">
+                        <form method="POST" action="{{ route('comments.store') }}" id="commentBox">
 
                             @csrf
 
                             <div class="row">
                                 <div class="col-md-2">
-                                    <img src="{{ auth()->user()->avatar }}" alt="" height="50" class="ml-5" id="chickPic">
+                                    <img src="{{ auth()->user()->avatar }}" alt="image" height="50" class="ml-5" id="chickPic">
                                 </div>
 
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" name="chickPost" placeholder="Poussin commentaire !">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" name="content" placeholder="Poussin commentaire !">
                                     </textarea>
+                                    <input class="form-control form-control-sm" id="tagsComment" name="tags" type="text" placeholder="#WhateverYouWant">
                                     </div>
+
 
                                 </div>
                             </div>
@@ -36,7 +40,8 @@
 
                             <div class="row">
                                 <div class="col-md-12 text-right">
-                                    <input type="submit" value="Commenter !" class="btn btn-warning mb-3">
+                                    <input type="hidden" value="{{ $chick->id }}" name="chickId">
+                                    <input type="submit" value="Commenter !" class="btn btn-warning mt-1" name="comment">
                                 </div>
                             </div>
 
@@ -53,7 +58,7 @@
 
 
                 <!-- user comments -->
-                @forelse ($comments as $comment)
+                @forelse ($chick->comments as $comment)
 
                 <div class="row">
 
@@ -75,7 +80,7 @@
                                     <h4><b>{{ $comment->user->chickname }}</b> <small class="text-muted">{{ $comment->created_at }}</small></h4>
                                 </a>
 
-                                @include ('comment-edit')
+                                @include('comment-edit')
 
                             </div>
                         </div>

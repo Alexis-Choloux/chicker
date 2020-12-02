@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-md-12 d-flex">
 
-                        <a href="{{ route('profile', $chick->user) }}" class="text-dark">
+                        <a href="{{ route('profile', $chick->user) }}" class="text-dark textHover">
                             <h4><b>{{ $chick->user->chickname }}</b> <small class="text-muted">{{ $chick->created_at }}</small></h4>
                         </a>
 
@@ -30,14 +30,19 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
 
-                        <p>{{ $chick->content }}<br>
-                            <small>{{ $chick->tags }}</small></p>
+                <a href="{{ route('chicks.show', $chick) }}" class="text-dark textHover">
+                    <div class="row">
+                        <div class="col-md-12">
 
+                            <p>{{ $chick->content }}<br>
+                                <small>{{ $chick->tags }}</small></p>
+
+                        </div>
                     </div>
-                </div>
+                </a>
+
+
             </div>
         </div>
 

@@ -39,17 +39,19 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'comment' => 'required|min:5|max:255',
+            'content' => 'required|min:5|max:255',
+            'tags' => 'min:2|max:50',
         ]);
 
         $comment = new Comment;
-        $comment->comment = $request->comment;
-        $comment->user()->associate($request->comment);
+        $comment->user_id = auth()->id();
+        $comment->chick_id = $request->input('chickId');
+        $comment->content = $request->input('content');
+        $comment->tags = $request->input('tags');
 
-        $chick = Chick::find($request->chick_id);
-        $chick->comments()->save($comment);
+        $comment->save();
 
-        return back();
+        return redirect()->route('home');
     }
 
 
@@ -82,9 +84,20 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Comment $comment, Request $request)
     {
-        //
+        $request->validate([
+            'content' => 'required|min:5|max:255',
+            'tags' => '',
+            'chick_id' => ''
+        ]);
+
+        $comment->content = $request->input('content');
+        $comment->tags = $request->input('tags');
+        $comment->chick_id = $request->input('chick_id');
+        $comment->save();
+
+        return redirect()->back()->with('message', 'Commentaire mis à jour !');
     }
 
     /**
@@ -93,8 +106,14 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
-        //
+        if (auth()->user()->id == $comment->user_id) {
+            $comment->delete();
+            return redirect()->back()->with('message', 'Commentaire supprimé !');
+        }
+        else {
+            return redirect()->back()->withErrors(['user_error'], 'Il faut être l\'auteur du commentaire pour le supprimer !');
+        }
     }
 }

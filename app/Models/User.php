@@ -70,12 +70,12 @@ class User extends Authenticatable
 
 
     // users timeline, only following
-    public function timeline()
-    {
-        $friends = $this->follows()->pluck('id');
+    // public function timeline()
+    // {
+    //     $friends = $this->follows()->pluck('id');
 
-        return Chick::whereIn('user_id', $friends)->orWhere('user_id', $this->id)->latest()->get();
-    }
+    //     return Chick::whereIn('user_id', $friends)->orWhere('user_id', $this->id)->latest()->get();
+    // }
 
 
     // FOLLOWS FUNCTIONS

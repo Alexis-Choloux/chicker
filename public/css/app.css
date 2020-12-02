@@ -10946,6 +10946,10 @@ a.text-dark:focus {
   margin-top: -60px;
 }
 
+.textHover:hover {
+  text-decoration: none;
+}
+
 #profileImg {
   margin-top: -80px;
 }
