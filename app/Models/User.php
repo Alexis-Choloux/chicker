@@ -61,6 +61,18 @@ class User extends Authenticatable
     }
 
 
+    // admin
+    public function isAdmin () {
+        return $this->roles_id === 0;
+    }
+
+
+    // change the user key (Laravel function)
+    public function getRouteKeyName()
+    {
+        return 'chickname';
+    }
+
 
     // users avatar (laravel function for user()->avatar)
     public function getAvatarAttribute()
@@ -97,7 +109,8 @@ class User extends Authenticatable
         return $this->follows()->detach($user);
     }
 
-    public function toggleFollow (User $user) {
+    public function toggleFollow(User $user)
+    {
         if ($this->isFollowing($user)) {
             return $this->unfollow($user);
         }
@@ -112,25 +125,10 @@ class User extends Authenticatable
     }
 
 
-    // change the user key (Laravel function)
-    public function getRouteKeyName()
-    {
-        return 'chickname';
-    }
-
-
-    // // path to profile
-    // public function path($append = '') {
-    //     $path = route('profile', $this->chickname);
-
-    //     return $append ? "{$path}/{$append}" : $path;
-    // }
-
 
     // password protection
-    public function setPasswordAttributes ($value) {
+    public function setPasswordAttributes($value)
+    {
         $this->attributes['password'] = bcrypt($value);
     }
-
-
 }

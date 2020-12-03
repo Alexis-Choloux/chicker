@@ -1,4 +1,4 @@
-@if (auth()->user()->id == $comment->user_id)
+@can('update', $comment)
 
 <div>
     <button type="button" class="btn btn-sm btn-outline-secondary ml-3" data-toggle="modal" data-target="#commentModal{{ $comment->id }}"><i class="far fa-edit"></i></button>
@@ -7,8 +7,6 @@
 <div>
 <button type="button" class="btn btn-sm btn-outline-danger ml-2" data-toggle="modal" data-target="#deleteModal{{ $comment->id }}"><i class="far fa-trash-alt"></i></button>
 </div>
-
-
 
 <!-- Edit Modal -->
 <div class="modal fade" id="commentModal{{ $comment->id }}" tabindex="-1" role="dialog" aria-labelledby="commentModal{{ $comment->id }}Label" aria-hidden="true">
@@ -64,8 +62,9 @@
         </div>
     </div>
 </div>
+@endcan
 
-
+@can ('delete', $comment)
 <!-- Delete Modal -->
 <div class="modal fade" id="deleteModal{{ $comment->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ $comment->id }}Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -100,5 +99,4 @@
         </div>
     </div>
 </div>
-
-@endif
+@endcan

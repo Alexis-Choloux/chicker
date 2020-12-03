@@ -21,13 +21,19 @@ class ChickController extends Controller
      */
     public function index()
     {
-        $chicks = Chick::with('comments')->latest()->get();
+        $user = User::findOrFail(auth()->user()->id);
 
-        return view('chicks.index', ['chicks' => $chicks]);
+        $friends = $user->follows()->pluck('id');
 
-        // return view('chicks.index', [
-        //     'chicks' => auth()->user()->timeline(),
-        // ]);
+        $chicks = Chick::whereIn('user_id', $friends)
+            ->orWhere('user_id', $user->id)
+            ->latest()
+            ->get();
+
+        return view('chicks.index', [
+            'chicks' => $chicks
+        ]);
+
     }
 
     /**
@@ -97,6 +103,7 @@ class ChickController extends Controller
      */
     public function update(Chick $chick)
     {
+        $this->authorize('update', $chick);
         $attributes = request()->validate([
             'content' => 'required|min:5|max:255',
             'image' => '',
@@ -115,16 +122,11 @@ class ChickController extends Controller
      */
     public function destroy(Chick $chick)
     {
-        // $attributes = request()->input('chickId');
-        // $chick->where($attributes)->delete();
+        $this->authorize('delete', $chick);
 
-        if (auth()->user()->id == $chick->user_id) {
-            $chick->delete();
-            return redirect()->back()->with('message', 'Chick supprimé !');
-        }
-        else {
-            return redirect()->back()->withErrors(['user_error'], 'Il faut être l\'auteur de ce Chick pour le supprimer !');
-        }
+        $chick->delete();
+
+        return redirect()->back()->with('message', 'Chick supprimé !');
     }
 
     public function search(Request $request)
@@ -136,11 +138,19 @@ class ChickController extends Controller
         $recherche = $request->input('q');
 
         $chicks = DB::table('chicks')
-        ->where('chicks.content', 'like', "%$recherche%")
-        ->orWhere('chicks.tags', 'like', "%$recherche%")
-        ->join('users', 'users.id', '=', 'chicks.user_id')
-        ->join('comments', 'comments.chick_id', '=', 'chicks.id')
-        ->get();
+            ->where('chicks.content', 'like', "%$recherche%")
+            ->orWhere('chicks.tags', 'like', "%$recherche%")
+            ->join('users', 'users.id', '=', 'chicks.user_id')
+            ->select(
+                'chicks.*',
+                'chicks.content as chick_content',
+                'chicks.tags as chick_tags',
+                'chicks.user_id as chick_user_id',
+                'chicks.id as chick_id',
+                'chicks.created_at as chick_created',
+                'users.chickname as user_chickname'
+            )
+            ->get();
 
         return view('chicks.search', ['chicks' => $chicks]);
     }

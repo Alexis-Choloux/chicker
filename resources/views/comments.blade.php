@@ -1,3 +1,5 @@
+<?php $commentsNumber = count($chick->comments) ?>
+
 <div class="row">
     <div class="col-md-12">
 
@@ -5,7 +7,12 @@
         data-target="#collapseComments{{ $chick->id }}" aria-expanded="false" 
         aria-controls="collapseComments{{ $chick->id }}" id="commentBtn">
             Commentaires
+            <span class="badge badge-dark">
+                    {{ $commentsNumber }}
+            </span>
+                
         </button>
+        
 
 
         <div class="collapse" id="collapseComments{{ $chick->id }}">

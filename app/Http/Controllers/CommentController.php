@@ -86,6 +86,8 @@ class CommentController extends Controller
      */
     public function update(Comment $comment, Request $request)
     {
+        $this->athorize('update', $comment);
+        
         $request->validate([
             'content' => 'required|min:5|max:255',
             'tags' => '',
@@ -108,6 +110,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        $this->authorize('delete', $comment);
+
         if (auth()->user()->id == $comment->user_id) {
             $comment->delete();
             return redirect()->back()->with('message', 'Commentaire supprimé !');
@@ -116,4 +120,5 @@ class CommentController extends Controller
             return redirect()->back()->withErrors(['user_error'], 'Il faut être l\'auteur du commentaire pour le supprimer !');
         }
     }
+
 }

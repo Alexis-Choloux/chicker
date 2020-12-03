@@ -1,5 +1,4 @@
-@if (auth()->user()->id == $chick->user_id)
-
+@can('update', $chick)
 <div>
     <button type="button" class="btn btn-sm btn-outline-secondary ml-3" data-toggle="modal" data-target="#chickModal{{ $chick->id }}"><i class="far fa-edit"></i></button>
 </div>
@@ -66,8 +65,9 @@
         </div>
     </div>
 </div>
+@endcan
 
-
+@can('delete', $chick)
 <!-- Delete Modal -->
 <div class="modal fade" id="deleteModal{{ $chick->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ $chick->id }}Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -102,5 +102,4 @@
         </div>
     </div>
 </div>
-
-@endif
+@endcan

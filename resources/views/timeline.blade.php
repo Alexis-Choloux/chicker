@@ -27,6 +27,7 @@
 
                         @include ('chick-edit')
 
+
                     </div>
                 </div>
 
@@ -36,8 +37,9 @@
                         <div class="col-md-12">
 
                             <p>{{ $chick->content }}<br>
-                                <small>{{ $chick->tags }}</small></p>
-
+                                <small>{{ $chick->tags }}</small>
+                                </p>
+                             
                         </div>
                     </div>
                 </a>
