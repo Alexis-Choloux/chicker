@@ -86,7 +86,7 @@ class CommentController extends Controller
      */
     public function update(Comment $comment, Request $request)
     {
-        $this->athorize('update', $comment);
+        $this->authorize('update', $comment);
         
         $request->validate([
             'content' => 'required|min:5|max:255',

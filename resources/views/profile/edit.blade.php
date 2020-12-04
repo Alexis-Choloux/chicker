@@ -19,7 +19,7 @@
                 Edition du profil
             </h1>
 
-            <form method="POST" action="{{ route('profile', $user) }}"> 
+            <form method="POST" action="{{ route('profile', $user) }}" name="edit"> 
                 @csrf
                 @method('PATCH')
 

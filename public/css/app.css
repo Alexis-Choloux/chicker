@@ -10954,3 +10954,19 @@ a.text-dark:focus {
   margin-top: -80px;
 }
 
+@media screen and (max-width: 767px) {
+  .sidebars {
+    display: none;
+  }
+
+  #profileImg {
+    margin-top: -370px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .sidebarsResponsive {
+    display: none;
+  }
+}
+

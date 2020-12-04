@@ -103,6 +103,7 @@ class ChickController extends Controller
     public function update(Chick $chick)
     {
         $this->authorize('update', $chick);
+        
         $attributes = request()->validate([
             'content' => 'required|min:5|max:255',
             'image' => '',

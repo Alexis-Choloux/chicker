@@ -20,6 +20,7 @@
 }
 
 
+
 // CHICK CONTENT
 #chickBox {
     border: solid #fed835 1px;
@@ -61,4 +62,20 @@
 // PROFILE
 #profileImg {
     margin-top: -80px;
+}
+
+// mediaqueries
+@media screen and (max-width:767px) {
+    .sidebars {
+        display: none;
+    }
+    #profileImg {
+        margin-top: -370px;
+    }
+}
+
+@media screen and (min-width:767px) {
+    .sidebarsResponsive {
+        display: none;
+    }
 }

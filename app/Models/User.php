@@ -62,7 +62,8 @@ class User extends Authenticatable
 
 
     // admin
-    public function isAdmin () {
+    public function isAdmin()
+    {
         return $this->roles_id === 0;
     }
 
@@ -81,34 +82,32 @@ class User extends Authenticatable
     }
 
 
-    // users timeline, only following
-    // public function timeline()
-    // {
-    //     $friends = $this->follows()->pluck('id');
-
-    //     return Chick::whereIn('user_id', $friends)->orWhere('user_id', $this->id)->latest()->get();
-    // }
-
 
     // FOLLOWS FUNCTIONS
-    // abonnés
     public function follows()
     {
         return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
     }
 
-    // s'abonner
     public function follow(User $user)
     {
         return $this->follows()->save($user);
     }
 
-    // se désabonner
+
     public function unfollow(User $user)
     {
         return $this->follows()->detach($user);
     }
 
+
+    // 
+    public function isFollowing(User $user)
+    {
+        return $this->follows()->where('following_user_id', $user->id)->exists();
+    }
+
+    
     public function toggleFollow(User $user)
     {
         if ($this->isFollowing($user)) {
@@ -118,11 +117,6 @@ class User extends Authenticatable
         return $this->follow($user);
     }
 
-    // 
-    public function isFollowing(User $user)
-    {
-        return $this->follows()->where('following_user_id', $user->id)->exists();
-    }
 
 
 

@@ -6,7 +6,7 @@
 
         <!-- left bar
     ======================================== -->
-        <div class="cold-md-2 offset-md-1">
+        <div class="cold-md-2 offset-md-1 sidebars">
             @include ('sidebar-links')
         </div>
 
@@ -63,7 +63,7 @@
 
         <!-- right bar
     ================================================ -->
-        <div class="col-md-2 text-center" id="friendsList">
+        <div class="col-md-2 text-center sidebars" id="friendsList">
             @include ('friends-list')
         </div>
 

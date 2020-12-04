@@ -19,7 +19,7 @@
                 Edition du mot de passe
             </h1>
 
-            <form method="POST" action="{{ route('update-password', $user) }}"> 
+            <form method="POST" action="{{ route('update-password', $user) }}" name="editPassword"> 
                 @csrf
                 @method('PATCH')
 

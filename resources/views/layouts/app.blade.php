@@ -76,7 +76,7 @@
                             <form class="form-inline my-2 my-lg-0" method="POST" role="search" action="{{ route('chicks.search') }}">
                                 @csrf
                                 <input class="form-control mr-sm-2" type="search" name="q" placeholder="Rechercher" aria-label="Search">
-                                    <button class="btn btn-outline-warning my-2 my-sm-0 text-secondary" type="submit">Rechercher</button>
+                                <button class="btn btn-outline-warning my-2 my-sm-0 text-secondary" type="submit">Rechercher</button>
                             </form>
                         </li>
 
@@ -89,10 +89,21 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                <a class="dropdown-item" href="{{ 'profil' }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Profil') }}
-                                </a>
+                                <span class="sidebarsResponsive">
+                                    <a href="{{ route('home') }}" class="ml-4 text-dark">
+                                        Accueil<br>
+                                    </a>
+
+                                    <a href="{{ route('explore') }}" class="ml-4 text-dark">
+                                        Explorer<br>
+                                    </a>
+
+                                    <a href="{{ route('profile', $user = auth()->user()->chickname) }}" class="ml-4 text-dark">
+                                        Profil
+                                    </a>
+
+                                </span>
+
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -102,6 +113,34 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
+                            </div>
+
+                            <div class="row sidebarsResponsive">
+                                <div class="col-12">
+
+                                    <h6 class="text-secondary"><b>Abonnements</b></h6>
+
+                                    <ul class="list-unstyled d-flex">
+
+                                        @forelse (auth()->user()->follows as $users)
+
+                                        <li class="mr-3 text-center">
+
+                                            <a href="{{ route('profile', $users) }}">
+                                                <img src="{{ $users->avatar }}" alt="" height="80" class="rounded-circle">
+
+                                                <p class="text-dark">{{ $users->chickname }}</p>
+                                            </a>
+
+                                        </li>
+
+                                        @empty
+                                        <p>Aucun abonnement</p>
+
+                                        @endforelse
+
+                                    </ul>
+                                </div>
                             </div>
                         </li>
 
