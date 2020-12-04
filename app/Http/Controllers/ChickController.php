@@ -33,7 +33,6 @@ class ChickController extends Controller
         return view('chicks.index', [
             'chicks' => $chicks
         ]);
-
     }
 
     /**
@@ -129,6 +128,7 @@ class ChickController extends Controller
         return redirect()->back()->with('message', 'Chick supprimé !');
     }
 
+
     public function search(Request $request)
     {
         $request->validate([
@@ -138,9 +138,10 @@ class ChickController extends Controller
         $recherche = $request->input('q');
 
         $chicks = DB::table('chicks')
+            ->join('users', 'users.id', '=', 'chicks.user_id')
             ->where('chicks.content', 'like', "%$recherche%")
             ->orWhere('chicks.tags', 'like', "%$recherche%")
-            ->join('users', 'users.id', '=', 'chicks.user_id')
+            ->orWhere('users.chickname', 'like', "%$recherche%")
             ->select(
                 'chicks.*',
                 'chicks.content as chick_content',
@@ -154,4 +155,5 @@ class ChickController extends Controller
 
         return view('chicks.search', ['chicks' => $chicks]);
     }
+
 }

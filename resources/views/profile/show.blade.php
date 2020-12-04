@@ -36,7 +36,7 @@
 
                     @if (auth()->user()->is($user))
                     <a href="{{ route('edit-password', $user) }}">
-                            <button type="submit" class="btn btn-light shadow mr-2">Changer mot de passe</button>
+                            <button type="submit" class="btn btn-light shadow mr-2">Mot de passe</button>
                         </a>
                         <a href="{{ route('edit', $user) }}">
                             <button type="submit" class="btn btn-light shadow">Editer</button>
