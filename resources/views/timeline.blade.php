@@ -25,7 +25,7 @@
                             <h4><b>{{ $chick->user->chickname }}</b> <small class="text-muted">{{ $chick->created_at }}</small></h4>
                         </a>
 
-                    
+                        @include ('chick-edit')
 
                     </div>
                 </div>

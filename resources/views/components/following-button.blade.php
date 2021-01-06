@@ -4,7 +4,7 @@
                     @csrf
                         <a href="">
                             <button type="submit" class="btn btn-warning shadow ml-3"> 
-                                {{ auth()->user()->isFollowing($user) ? 'Se désabonner' : 'S\'abonner' }}
+                                    {{ auth()->user()->isFollowing($user) ? 'Se désabonner' : 'S\'abonner' }}
                             </button>
                         </a>
                     </form>

@@ -25,7 +25,6 @@ Route::middleware('auth')->group(function() {
     Route::get('/chicks', [App\Http\Controllers\ChickController::class, 'index'])->name('home'); 
 
     Route::resource('/comments', App\Http\Controllers\CommentController::class);
-
 });
 
 
@@ -58,6 +57,3 @@ Route::patch('/profile/{user}', [App\Http\Controllers\ProfileController::class, 
 
 // abonnements
 Route::post('/profile/{user}/follow', [App\Http\Controllers\FollowsController::class, 'store']);
-
-
-
